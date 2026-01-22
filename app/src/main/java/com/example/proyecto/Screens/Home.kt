@@ -10,8 +10,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
@@ -20,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -32,35 +40,41 @@ import java.nio.charset.StandardCharsets
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PantallaHome(navController: NavHostController)
-{
+fun PantallaHome(navController: NavHostController) {
     val lista = CrearLista()
 
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text("Lista de Tareas", color = Color.White, fontFamily = ComicSans) },
+                title = { Text("Lista de Contactos", color = Color.White, fontFamily = ComicSans) },
                 colors = TopAppBarDefaults.topAppBarColors(Color.Red)
             )
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = {}, containerColor = Color.Red
+            )
+            { Icon(imageVector = Icons.Filled.Add, "Importar", tint = Color.White) }
         }
-    ) {
-            paddingValues ->
-        Column(Modifier.padding(paddingValues).fillMaxSize().padding(15.dp,15.dp)) {
+    ) { paddingValues ->
+        Column(Modifier
+            .padding(paddingValues)
+            .fillMaxSize()
+            .padding(15.dp, 15.dp)) {
             // MostrarLista(lista)
-            MostrarLista2(lista, navController)
+            MostrarLista3(lista, navController)
         }
     }
 }
 
 @Composable
-fun Testeo()
-{
-    Row (
+fun Testeo() {
+    Row(
         modifier = Modifier
             .fillMaxWidth()
             .height(150.dp)
-    ){
-        Column (
+    ) {
+        Column(
             modifier = Modifier
                 .padding(10.dp)
                 .background(color = Color.Red),
@@ -70,12 +84,14 @@ fun Testeo()
             AsyncImage(
                 model = "https://i.imgur.com/NsdRQil.png",
                 "jscdksfjsdfjk",
-                modifier = Modifier.size(100.dp).clickable(onClick = {})
+                modifier = Modifier
+                    .size(100.dp)
+                    .clickable(onClick = {})
             )
             Text("Susi")
         }
 
-        Column (
+        Column(
             modifier = Modifier
                 .padding(10.dp)
                 .background(color = Color.Red),
@@ -85,12 +101,14 @@ fun Testeo()
             AsyncImage(
                 model = "https://i.imgur.com/NsdRQil.png",
                 "jscdksfjsdfjk",
-                modifier = Modifier.size(100.dp).clickable(onClick = {})
+                modifier = Modifier
+                    .size(100.dp)
+                    .clickable(onClick = {})
             )
             Text("Susi")
         }
 
-        Column (
+        Column(
             modifier = Modifier
                 .padding(10.dp)
                 .background(color = Color.Red),
@@ -100,7 +118,9 @@ fun Testeo()
             AsyncImage(
                 model = "https://i.imgur.com/NsdRQil.png",
                 "jscdksfjsdfjk",
-                modifier = Modifier.size(100.dp).clickable(onClick = {})
+                modifier = Modifier
+                    .size(100.dp)
+                    .clickable(onClick = {})
             )
             Text("Susi")
         }
@@ -113,31 +133,41 @@ fun Testeo()
 
 fun CrearLista(): List<Contacto> {
     val lista = listOf<Contacto>(
-        Contacto("W.D. Gaster",666, "https://i.imgur.com/NsdRQil.png", "SOY MUY MUY INTERESANTE"),
-        Contacto("Susie Gaster",66, "https://i.imgur.com/AWD9vvg.png", "oh mi nombre completo? es susie gaster"),
-        Contacto("Sans Gaster",6, "https://i.imgur.com/2eyUnYA.png", "estoy pasando un mal rato")
+        Contacto("W.D. Gaster", 666, "https://i.imgur.com/NsdRQil.png", "SOY MUY MUY INTERESANTE"),
+        Contacto(
+            "Susie Gaster",
+            66,
+            "https://i.imgur.com/AWD9vvg.png",
+            "oh mi nombre completo? es susie gaster"
+        ),
+        Contacto("Sans Gaster", 6, "https://i.imgur.com/2eyUnYA.png", "estoy pasando un mal rato")
     )
 
     return lista
 }
 
 @Composable
-fun MostrarLista(lista: List<Contacto>, navController: NavHostController)
-{
+fun MostrarLista(lista: List<Contacto>, navController: NavHostController) {
 
     lista.forEach()
     {
-        Row(Modifier.padding(25.dp).fillMaxWidth().height(80.dp),
+        Row(
+            Modifier
+                .padding(25.dp)
+                .fillMaxWidth()
+                .height(80.dp),
             Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically) {
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             Text(it.nombre, fontWeight = FontWeight.Bold, color = Color.Red)
             AsyncImage(
                 model = it.urlImagen,
-                contentDescription = "cjscj",
+                contentDescription = "",
                 modifier = Modifier
                     .size(50.dp, 50.dp)
                     .clickable(onClick = {
                         navController.navigate("${Screens.DetailScreen.route}/${it.nombre}/${it.edad}/${it.urlImagen}/${it.bio}")
+                        // hola
                     })
             )
         }
@@ -146,13 +176,12 @@ fun MostrarLista(lista: List<Contacto>, navController: NavHostController)
 }
 
 @Composable
-fun MostrarLista2(lista: List<Contacto>, navController: NavHostController)
-{
-    Row (
+fun MostrarLista2(lista: List<Contacto>, navController: NavHostController) {
+    Row(
         modifier = Modifier
             .fillMaxWidth()
             .height(150.dp)
-    ){
+    ) {
         lista.forEach {
             val nombre = URLEncoder.encode(it.nombre, StandardCharsets.UTF_8.toString())
             val urlImagen = URLEncoder.encode(it.urlImagen, StandardCharsets.UTF_8.toString())
@@ -168,13 +197,52 @@ fun MostrarLista2(lista: List<Contacto>, navController: NavHostController)
                 AsyncImage(
                     model = it.urlImagen,
                     "jscdksfjsdfjk",
-                    modifier = Modifier.size(100.dp).clickable(onClick = {
-                        navController.navigate(
-                            "${Screens.DetailScreen.route}/$nombre/${it.edad}/$urlImagen/$bio"
-                        )
-                    })
+                    modifier = Modifier
+                        .size(100.dp)
+                        .clickable(onClick = {
+                            navController.navigate(
+                                "${Screens.DetailScreen.route}/$nombre/${it.edad}/$urlImagen/$bio"
+                            )
+                        })
                 )
                 Text(it.nombre)
+            }
+        }
+    }
+}
+
+@Composable
+fun MostrarLista3(lista: List<Contacto>, navController: NavHostController) {
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(3),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+        horizontalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        items(lista) { contacto ->
+
+            val nombre = URLEncoder.encode(contacto.nombre, StandardCharsets.UTF_8.toString())
+            val urlImagen = URLEncoder.encode(contacto.urlImagen, StandardCharsets.UTF_8.toString())
+            val bio = URLEncoder.encode(contacto.bio, StandardCharsets.UTF_8.toString())
+
+            Column(
+                modifier = Modifier.padding(10.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                AsyncImage(
+                    model = contacto.urlImagen,
+                    contentDescription = contacto.nombre,
+                    modifier = Modifier
+                        .size(100.dp)
+                        .clickable {
+                            navController.navigate(
+                                "${Screens.DetailScreen.route}/$nombre/${contacto.edad}/$urlImagen/$bio"
+                            )
+                        }
+                )
+                Text(contacto.nombre, textAlign = TextAlign.Center)
             }
         }
     }

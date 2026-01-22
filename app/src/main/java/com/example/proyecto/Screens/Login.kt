@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -34,7 +35,6 @@ import com.example.proyecto.R
 val ComicSans = FontFamily(Font(R.font.comic_sans_ms, FontWeight.Normal))
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview
 @Composable
 fun PantallaLogin(navController: NavHostController) {
     Scaffold (
@@ -65,7 +65,8 @@ fun PantallaLogin(navController: NavHostController) {
             TextField(
                 value = contrasena,
                 onValueChange = { contrasena = it },
-                label = { Text("Contraseña") }
+                label = { Text("Contraseña")},
+                visualTransformation =  PasswordVisualTransformation()
             )
 
             Button( onClick = {
