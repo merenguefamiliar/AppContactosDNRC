@@ -32,7 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import com.example.proyecto.Contactos.Contacto
+import com.example.proyecto.model.Contacto
 import com.example.proyecto.Screens.ComicSans
 import com.example.proyecto.Screens.Screens
 import java.net.URLEncoder
