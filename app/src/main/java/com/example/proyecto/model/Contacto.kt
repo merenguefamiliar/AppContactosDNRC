@@ -5,5 +5,6 @@ data class Contacto (
     var edad: Int,
     var urlImagen: String,
     var bio: String,
-    var calceta: String
 )
+
+// no va
