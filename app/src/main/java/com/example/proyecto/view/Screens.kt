@@ -1,4 +1,4 @@
-package com.example.proyecto.Screens
+package com.example.proyecto.view
 
 sealed class Screens (val route : String){
 

@@ -9,9 +9,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.gestortareasdnt.screens.PantallaHome
-import com.example.proyecto.Screens.PantallaDetalles
-import com.example.proyecto.Screens.PantallaLogin
-import com.example.proyecto.Screens.Screens
+import com.example.proyecto.view.PantallaDetalles
+import com.example.proyecto.view.PantallaLogin
+import com.example.proyecto.view.Screens
 
 @Composable
 fun NavigatorHostController() {
