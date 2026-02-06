@@ -6,5 +6,3 @@ data class Contacto (
     var urlImagen: String,
     var bio: String,
 )
-
-// nsdfssfsdfsfasdas
