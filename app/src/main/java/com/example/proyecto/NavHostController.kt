@@ -1,5 +1,7 @@
 package com.example.proyecto
 
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.TweenSpec
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
@@ -21,7 +23,31 @@ fun NavigatorHostController() {
 
     NavHost(
         navController = navController,
-        startDestination = Screens.LoginScreen.route
+        startDestination = Screens.LoginScreen.route,
+        enterTransition = {
+            slideIntoContainer(
+                AnimatedContentTransitionScope.SlideDirection.Left,
+                animationSpec = TweenSpec(700)
+            )
+        },
+        exitTransition = {
+            slideOutOfContainer(
+                AnimatedContentTransitionScope.SlideDirection.Left,
+                animationSpec = TweenSpec(700)
+            )
+        },
+        popEnterTransition = {
+            slideIntoContainer(
+                AnimatedContentTransitionScope.SlideDirection.Right,
+                animationSpec = TweenSpec(700)
+            )
+        },
+        popExitTransition = {
+            slideOutOfContainer(
+                AnimatedContentTransitionScope.SlideDirection.Right,
+                animationSpec = TweenSpec(700)
+            )
+        },
     ) {
         composable(Screens.LoginScreen.route) {
             PantallaLogin(navController)
