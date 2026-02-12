@@ -8,10 +8,7 @@ data class ContactEntity (
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val name: String,
-    val lastName: String,
-    val city: String,
-    val state: String,
-    val thumbnail: String,
     val phone: String,
-    val email: String
+    val email: String,
+    val imageUrl: String = ""
 )

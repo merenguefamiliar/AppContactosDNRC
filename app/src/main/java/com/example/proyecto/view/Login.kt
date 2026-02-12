@@ -1,8 +1,11 @@
 package com.example.proyecto.view
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Done
@@ -23,10 +26,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.proyecto.R
@@ -36,6 +41,9 @@ val ComicSans = FontFamily(Font(R.font.comic_sans_ms, FontWeight.Normal))
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PantallaLogin(navController: NavHostController) {
+
+    val context = LocalContext.current // para el toast
+
     Scaffold (
         topBar = {
             CenterAlignedTopAppBar(
@@ -60,6 +68,8 @@ fun PantallaLogin(navController: NavHostController) {
                 label = { Text("Usuario")}
             )
 
+            Spacer(modifier = Modifier.height(8.dp))
+
             var contrasena by rememberSaveable { mutableStateOf("") }
             TextField(
                 value = contrasena,
@@ -68,8 +78,16 @@ fun PantallaLogin(navController: NavHostController) {
                 visualTransformation =  PasswordVisualTransformation()
             )
 
+            Spacer(modifier = Modifier.height(8.dp))
+
             Button( onClick = {
-                navController.navigate(Screens.HomeScreen.route)
+                if(usuario.isNotBlank() && contrasena.isNotBlank()) {
+                    navController.navigate(Screens.HomeScreen.route)
+                }
+                else
+                {
+                    Toast.makeText(context,"Falta algo por rellenar!!", Toast.LENGTH_SHORT).show()
+                }
             }, colors = ButtonDefaults.buttonColors(Color.Red)) {
                 Icon(imageVector = Icons.Filled.Done, "Iniciar sesión")
             }

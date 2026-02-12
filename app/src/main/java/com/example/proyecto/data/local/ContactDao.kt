@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 //Interfaz de acceso a datos (Data Access Object)
@@ -22,4 +23,7 @@ interface ContactDao {
     //Eliminar Contacto
     @Delete
     suspend fun eliminarContacto(contacto: ContactEntity)
+
+    @Update
+    suspend fun actualizarContacto(contacto : ContactEntity)
 }

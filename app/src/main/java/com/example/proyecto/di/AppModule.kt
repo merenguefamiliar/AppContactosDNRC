@@ -21,7 +21,8 @@ object AppModule {
             context,
             ContactDatabase::class.java,
             "contactos_database" //Nombre que almacenará la BBDD
-        ).build()
+        ).fallbackToDestructiveMigration()
+            .build()
     }
 
     //Módulo que provee el DAO

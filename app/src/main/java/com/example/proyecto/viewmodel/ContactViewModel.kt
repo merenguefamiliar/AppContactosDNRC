@@ -89,4 +89,11 @@ fun loadContactAPI() {
             contactRepository.eliminarContacto(contacto)
         }
     }
+    // lo mimsmo la tercera vez despues de ponerlo en el dao y el repositorio
+    fun actualizarContact(contacto: ContactEntity)
+    {
+        viewModelScope.launch {
+            contactRepository.actualizarContacto(contacto)
+        }
+    }
 }

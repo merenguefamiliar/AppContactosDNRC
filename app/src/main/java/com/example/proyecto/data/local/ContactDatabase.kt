@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 
 @Database(
     entities = [ContactEntity::class],
-    version = 1,
+    version = 4, // cuando agregue una nueva fila o algo en la base de datos cambiar esto o peta, aunque se borra tdo
     exportSchema = false
 )
 

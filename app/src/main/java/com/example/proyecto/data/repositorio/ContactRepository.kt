@@ -72,4 +72,9 @@ class ContactRepository @Inject constructor(
     fun obtenerTodosLosContactos(): Flow<List<ContactEntity>> {
         return contactDao.obtenerTodosLosContactos()
     }
+    // para actualizar como el de borrar pero actualizando
+    suspend fun actualizarContacto(contactEntity: ContactEntity)
+    {
+        contactDao.actualizarContacto(contactEntity)
+    }
 }
