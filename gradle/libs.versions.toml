@@ -12,6 +12,19 @@ uiText = "1.10.0"
 coilVersion = "2.6.0"
 navigationCompose = "2.9.6"
 foundation = "1.10.1"
+#Hilt versions
+hiltV = "2.56.2"
+hiltNavigationComposeV = "1.2.0"
+
+#ksp
+kspV = "2.0.21-1.0.27"
+
+#Retrofit
+retrofitV = "3.0.0"
+okhttp = "4.12.0"
+
+#Room
+roomV = "2.7.2"
 
 [libraries]
 androidx-coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coilVersion" }
@@ -32,9 +45,24 @@ androidx-compose-material3 = { group = "androidx.compose.material3", name = "mat
 androidx-compose-ui-text = { group = "androidx.compose.ui", name = "ui-text", version.ref = "uiText" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation", version.ref = "foundation" }
+#Hilt
+hilt-android = { group = "com.google.dagger", name="hilt-android", version.ref = "hiltV" }
+hilt-compiler = { group = "com.google.dagger", name="hilt-compiler", version.ref = "hiltV" }
+hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationComposeV"}
+
+#Retrofit
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitV" }
+retrofit-gsonConverter = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofitV" }
+okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+
+#Room
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomV" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomV" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomV" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-
+ksp = { id = "com.google.devtools.ksp", version.ref = "kspV"}
+hilt = {id="com.google.dagger.hilt.android", version.ref = "hiltV"}
