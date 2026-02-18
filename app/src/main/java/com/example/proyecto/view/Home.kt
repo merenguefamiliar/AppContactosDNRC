@@ -31,7 +31,8 @@ fun PantallaHome(viewModel: ContactViewModel, navController: NavHostController) 
         topBar = {
             CenterAlignedTopAppBar(
                 title = { Text("Lista de Contactos", color = Color.White) },
-                colors = TopAppBarDefaults.topAppBarColors(Color.Red)
+                colors = TopAppBarDefaults.topAppBarColors(Color.Red),
+                actions = {IconButton(onClick = {viewModel.loadContactAPI()}) {Text("Importar API", color = Color.White)}}
             )
         },
         floatingActionButton = {
