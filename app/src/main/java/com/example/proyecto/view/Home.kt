@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -14,6 +15,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -32,7 +34,18 @@ fun PantallaHome(viewModel: ContactViewModel, navController: NavHostController) 
             CenterAlignedTopAppBar(
                 title = { Text("Lista de Contactos", color = Color.White) },
                 colors = TopAppBarDefaults.topAppBarColors(Color.Red),
-                actions = {IconButton(onClick = {viewModel.loadContactAPI()}) {Text("Importar API", color = Color.White)}}
+                actions = {
+                    Button(
+                        onClick = { viewModel.loadContactAPI() },
+                        colors = ButtonDefaults.buttonColors(Color.White)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Filled.AccountBox,
+                            contentDescription = "API",
+                            tint = Color.Red
+                        )
+                    }
+                }
             )
         },
         floatingActionButton = {
@@ -43,7 +56,11 @@ fun PantallaHome(viewModel: ContactViewModel, navController: NavHostController) 
                 },
                 containerColor = Color.Red
             ) {
-                Icon(imageVector = Icons.Filled.Add, contentDescription = "Agregar", tint = Color.White)
+                Icon(
+                    imageVector = Icons.Filled.Add,
+                    contentDescription = "Agregar",
+                    tint = Color.White
+                )
             }
         }
     ) { paddingValues ->
