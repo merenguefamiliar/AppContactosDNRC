@@ -1,5 +1,6 @@
 package com.example.proyecto.view
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -16,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.BitmapPainter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -27,7 +29,9 @@ import com.example.proyecto.viewmodel.ContactViewModel
 @Composable
 fun PantallaHome(viewModel: ContactViewModel, navController: NavHostController) {
 
+    val context = LocalContext.current
     val contactos = viewModel.contactos.collectAsState().value
+    val isConnected = viewModel.isConnected.collectAsState().value
 
     Scaffold(
         topBar = {
@@ -36,7 +40,16 @@ fun PantallaHome(viewModel: ContactViewModel, navController: NavHostController) 
                 colors = TopAppBarDefaults.topAppBarColors(Color.Red),
                 actions = {
                     Button(
-                        onClick = { viewModel.loadContactAPI() },
+                        onClick = {
+                            if (isConnected)
+                                viewModel.loadContactAPI()
+                            else
+                                Toast.makeText(
+                                    context,
+                                    "No hay internet!",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                        },
                         colors = ButtonDefaults.buttonColors(Color.White)
                     ) {
                         Icon(
