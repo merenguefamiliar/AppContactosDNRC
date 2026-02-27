@@ -19,13 +19,7 @@ class ContactRepository @Inject constructor(
     suspend fun getNewContact(): ContactEntity {
 
         val result = apiService.getContact().results.first()
-
-        return ContactEntity(
-            name = "${result.name.first} ${result.name.last}",
-            phone = result.phone,
-            email = result.email,
-            imageUrl = result.picture.thumbnail
-        )
+        return result.toEntity()
     }
 
     suspend fun insertarContacto(contactEntity: ContactEntity) {
