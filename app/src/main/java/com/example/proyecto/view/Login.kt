@@ -7,13 +7,17 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -30,7 +34,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -44,19 +50,19 @@ fun PantallaLogin(navController: NavHostController) {
 
     val context = LocalContext.current // para el toast
 
-    Scaffold (
+    Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = {Text("login", color = Color.White, fontFamily = ComicSans)},
+                title = { Text("login", color = Color.White, fontFamily = ComicSans) },
                 colors = TopAppBarDefaults.topAppBarColors(Color.Red)
             )
         }
     )
-    {
-        paddingValues ->
-        Column (modifier = Modifier
-            .padding(paddingValues)
-            .fillMaxSize(),
+    { paddingValues ->
+        Column(
+            modifier = Modifier
+                .padding(paddingValues)
+                .fillMaxSize(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -65,28 +71,43 @@ fun PantallaLogin(navController: NavHostController) {
             TextField(
                 value = usuario,
                 onValueChange = { usuario = it },
-                label = { Text("Usuario")}
+                label = { Text("Usuario") }
             )
 
             Spacer(modifier = Modifier.height(8.dp))
 
             var contrasena by rememberSaveable { mutableStateOf("") }
+            var visible by rememberSaveable { mutableStateOf(false) }
+
             TextField(
                 value = contrasena,
                 onValueChange = { contrasena = it },
-                label = { Text("Contraseña")},
-                visualTransformation =  PasswordVisualTransformation()
+                label = { Text("Contraseña") },
+                visualTransformation = if (visible)
+                    VisualTransformation.None
+                else
+                    PasswordVisualTransformation(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                trailingIcon = {
+                    IconButton(onClick = {
+                        visible = !visible
+                    }) {
+                        val icono = if (visible)
+                            Icons.Filled.VisibilityOff
+                        else
+                            Icons.Filled.Visibility
+                        Icon(imageVector = icono, contentDescription = "")
+                    }
+                }
             )
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            Button( onClick = {
-                if(usuario.isNotBlank() && contrasena.isNotBlank()) {
+            Button(onClick = {
+                if (usuario.isNotBlank() && contrasena.isNotBlank()) {
                     navController.navigate(Screens.HomeScreen.route)
-                }
-                else
-                {
-                    Toast.makeText(context,"Falta algo por rellenar!!", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, "Falta algo por rellenar!!", Toast.LENGTH_SHORT).show()
                 }
             }, colors = ButtonDefaults.buttonColors(Color.Red)) {
                 Icon(imageVector = Icons.Filled.Done, "Iniciar sesión")
